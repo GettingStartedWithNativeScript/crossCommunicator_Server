@@ -221,8 +221,9 @@ function sendClientInfo(currentClientId, response) {
 
 function handleClient(data, response) {
     var messages = JSON.stringify(data);
+    messages = messages.replace(/[\u0080-\uFFFF]/g, '');
     data.messages = [];
-    response.writeHead(200, {'Content-Length': messages.length , 'Content-Type': 'text/plain'});
+    response.writeHead(200, {'Content-Length': messages.length , 'Content-Type': 'application/json'});
     response.write(messages);
     response.end();
 }
